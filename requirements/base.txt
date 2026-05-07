@@ -1,0 +1,16 @@
+Django>=4.2,<5.0
+djangorestframework
+django-cors-headers
+django-allauth
+django-otp
+django-redis
+django-celery-results
+django-ratelimit
+drf-spectacular
+boto3
+dnspython
+psycopg2-binary
+celery[redis]
+redis
+python-decouple
+whitenoise

@@ -14,3 +14,5 @@ celery[redis]
 redis
 python-decouple
 whitenoise
+dns.resolver
+cryptography

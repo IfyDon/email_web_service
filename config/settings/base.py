@@ -114,3 +114,38 @@ REST_FRAMEWORK = {
     ],
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
+
+# Authentication settings
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',   # default
+    'allauth.account.auth_backends.AuthenticationBackend',  # for allauth
+]
+
+# Allauth configuration
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'  # or 'optional'
+ACCOUNT_AUTHENTICATION_METHOD = 'email'   # login with email
+ACCOUNT_USERNAME_REQUIRED = False
+
+# REST Framework
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+        'core.permissions.api_key_auth.APIKeyAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+    'DEFAULT_THROTTLE_CLASSES': [
+        'core.utils.rate_limiter.APIKeyRateThrottle',
+    ],
+    'DEFAULT_THROTTLE_RATES': {
+        'user': None,   # not used
+    },
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
+# URL to redirect after login (for web dashboard)
+LOGIN_REDIRECT_URL = 'dashboard:index'
+LOGOUT_REDIRECT_URL = '/'
+LOGIN_URL = 'login'
